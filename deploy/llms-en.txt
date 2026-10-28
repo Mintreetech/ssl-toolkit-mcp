@@ -1,0 +1,43 @@
+# IDigiTrust SSL Toolkit
+
+> Free SSL/PKI online toolkit with a web UI and an MCP (Model Context Protocol) endpoint. All processing is in-memory; private keys and passwords are never stored or logged.
+
+Web: https://tools.idigitrust.com/
+MCP endpoint: https://tools.idigitrust.com/api/v1/mcp
+MCP protocol notes (Chinese, canonical): https://tools.idigitrust.com/llms.txt
+
+## Modules (web)
+
+- [HTTPS Audit](https://tools.idigitrust.com/): SSL Labs-style grading (A+–F) plus Chinese GM (TLCP/SM2/SM3/SM4) handshake detection, full-chain OCSP/CRL revocation (incl. cross-signed), Apple ATS baseline, PQC identification
+- [CSR Generator](https://tools.idigitrust.com/csr): CN auto-added to SAN, IDNA/Punycode for Chinese domain names, PKCS#1/SEC1 key output
+- [Certificate Match](https://tools.idigitrust.com/match): cert/key/CSR pairwise verification via SPKI SHA-256 fingerprints
+- [DCV Pre-check](https://tools.idigitrust.com/dcv): DNS (`_dnsauth` commercial CAs / `_acme-challenge` ACME, auto-switched) and HTTP file validation; byte-level token comparison (detects CR/LF, case, trailing-dot issues), CAA parent-chain walk, DNSSEC broken-chain detection, WAF interception probing with a real DCV bot UA (`DigiCert DCV Bot/1.1`)
+- [Format Converter](https://tools.idigitrust.com/convert): PEM/P12/JKS in any direction, AIA smart chain-fill, legacy-friendly P12 (3DES+SHA-1)
+- [Certificate Viewer](https://tools.idigitrust.com/viewer): full-chain OCSP/CRL revocation (incl. cross-signed), root-trust decision via CCADB merged root store, chain auto-ordering
+- Certificate automation: overview of the RoboTLS lifecycle product (https://www.robotls.com/)
+
+## MCP interface
+
+- Transport: same-origin POST JSON-RPC 2.0 over HTTP (protocol version 2024-11-05). No stdio, no legacy HTTP+SSE; clients with custom transports can connect by URL. A standard Streamable HTTP endpoint is planned.
+- Auth: none required; shared per-IP rate limit (HTTP 429 on excess).
+- Timeouts: HTTPS/DCV tools run synchronously and return the complete event array — use client timeouts of at least 120 seconds.
+- Errors: returned via `result.isError`; `content[].text` carries result JSON or an error description.
+- Privacy: CSR-generation and format-conversion responses may contain private keys — do not publish or log such responses.
+
+## MCP tools (8)
+
+- `inspect.run` — HTTPS audit: protocols/ciphers grading, GM TLCP/SM2, chain OCSP/CRL, root trust. Params: `host` (required, FQDN with optional :port), `port`, `force` (skip cache).
+- `csr.generate` — RSA/ECC key + CSR. Params: `subject` (required: `common_name`, `country`; optional `organization`, `province`, `locality`, `san[]`), `algorithm` (required: RSA-2048/3072/4096, EC-P256/384/521), `hash_alg` (SHA-256/384/512, RSA only).
+- `csr.decode` — parse CSR (PEM / base64-DER / DER): subject, key algorithm, SAN, extensions, SPKI fingerprint, self-signature integrity. Params: `csr` (required).
+- `cert.decode` — parse certificate (PEM bundle / base64-DER / DER): all fields + full-chain revocation (OCSP/CRL incl. cross-signed) + chain matching and root identification. Params: `cert` (required), `chain`, `check_revocation` (default true).
+- `cert.match` — cert/key/CSR matching via SPKI SHA-256. Params: `mode` (required: cert-key | cert-csr | key-csr), `cert`, `key`, `csr`, `password`.
+- `dcv.check` — DCV pre-check (DNS TXT/CNAME or HTTP file), returns the full event stream synchronously. Params: `mode` (required: dns | http), `domain` (dns), `file_url` (http), `record_type` (txt|cname), `expected_token` (enables byte-level match), `target_ca` (letsencrypt | digicert | sectigo | godaddy | globalsign | zerossl).
+- `dcv.list_cas` — list supported CAs for challenge-path derivation and CAA comparison. No params.
+- `convert.run` — PEM/P12/JKS conversion in any direction (incl. same-format password reset). Params: `source_kind`/`target_kind` (required: pem|p12|jks), PEM sources `cert_pem`/`key_pem`/`chain_pem`, `source_blob_base64` (p12/jks), `source_password`, `source_alias`, `target_password` (required for p12/jks), `target_alias`, `enable_aia_fill`.
+
+## Known limitations
+
+- SM2 certificates: HTTPS audit detects GM handshakes but does not verify root trust; the certificate viewer does not yet parse SM2 certs/CSRs.
+- Disabling `check_revocation` only skips OCSP/CRL; AIA fetching may still make outbound requests.
+- Converted-file `download_id` is valid for 5 minutes at `GET /api/v1/convert/download/{id}`.
+- `/expiry` is an informational page for the RoboTLS automation product — there is no expiry-monitoring API.
