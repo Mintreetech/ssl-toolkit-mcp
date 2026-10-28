@@ -1,0 +1,23 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
+  "name": "com.idigitrust/ssl-toolkit",
+  "display_name": {
+    "en": "IDigiTrust SSL Toolkit",
+    "zh": "IDigiTrust SSL 工具集"
+  },
+  "description": {
+    "en": "Free SSL/PKI toolkit over MCP: HTTPS audits (incl. Chinese GM TLCP/SM2/SM3/SM4), CSR generate/decode, cert decode & chain revocation (OCSP/CRL incl. cross-signed), cert/key/CSR matching, DCV pre-check (DNS/HTTP, byte-level compare, CAA walk), PEM/P12/JKS conversion. No API key required.",
+    "zh": "免费 SSL/PKI 工具集 MCP 服务：HTTPS 体检（含国密 TLCP/SM2/SM3/SM4）、CSR 生成/解析、证书解析与整链吊销检查（OCSP/CRL 含交叉证书）、证书/私钥/CSR 匹配、DCV 预检（DNS/HTTP 字节级比对、CAA 回溯）、PEM/P12/JKS 格式转换。无需 API Key。"
+  },
+  "version": "1.5.0",
+  "publication": {
+    "state": "draft"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://tools.idigitrust.com/api/v1/mcp",
+      "headers": []
+    }
+  ]
+}
