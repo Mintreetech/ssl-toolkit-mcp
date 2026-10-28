@@ -1,0 +1,21 @@
+IDigiTrust SSL Toolkit — Site Content & Documentation
+Copyright (c) 2026 IDigiTrust. All rights reserved.
+
+The documentation, README, and metadata files in this repository describe the
+publicly available service at https://tools.idigitrust.com/ and its MCP endpoint.
+You may link to, quote, and reference these materials for the purpose of
+integrating with or cataloguing the service (including MCP registries and
+directories).
+
+Redistribution of the full contents of this repository requires attribution
+("IDigiTrust SSL Toolkit" with a link to https://tools.idigitrust.com/).
+
+The service itself is provided free of charge, without registration:
+- Private keys processed by the service are handled in memory only and are
+  never stored or logged.
+- The API is rate-limited per IP address; see the site for current limits.
+
+THE SERVICE AND THESE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY
+KIND, EXPRESS OR IMPLIED. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY ARISING FROM THE USE OF THE
+SERVICE.
