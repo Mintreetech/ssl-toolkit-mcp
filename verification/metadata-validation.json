@@ -1,0 +1,8 @@
+{
+  "checkedAt": "2026-11-09T07:30:14.613753+00:00",
+  "schemaURL": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "schemaSHA256": "3fba09590c99f61735d234822279f4223fab9e300c0a81e81c91ab62a4114de0",
+  "validator": "Ajv with ajv-formats; draft-07; strict=false; allErrors=true",
+  "schemaAndURIFormatsPassed": true,
+  "serverJSONSHA256": "9c406d627c5191f97d5c22a2b25ad58a508407e653bb12e57afe2dc7cceedd72"
+}

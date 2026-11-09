@@ -13,7 +13,7 @@ closed-source.
    - expected vs. actual result
    - timestamp (results are cached; `force`/hard-refresh may be needed)
 2. **Client compatibility** — if you connected the MCP endpoint to a client
-   (Cherry Studio, Claude, Cursor, custom adapters…), share what worked and
+   (VS Code, Claude Code, Cursor…), share what worked and
    what didn't. Transport notes live in https://tools.idigitrust.com/llms.txt
 3. **Feature requests** — especially for `dcv.check`: which real-world failure
    modes (CDN/WAF combos, DNSSEC weirdness, split-horizon DNS) should a
@@ -29,3 +29,7 @@ closed-source.
   same change.
 - `deploy/robots.txt` should be deployed at the site root; review the
   AI-crawler allow-list quarterly.
+
+- Keep the English and Chinese README transport statements consistent with `server.json` and the deployed endpoint. Re-run `scripts/check-streamable.mjs` before claiming compatibility.
+- Keep the production-key warning above setup examples and in both language versions, the English AI index, and sensitive tool descriptions.
+- Never attach private keys, keystores, passwords, or private client transcripts to issues or test evidence.

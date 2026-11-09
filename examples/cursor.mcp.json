@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "ssl-toolkit": {
+      "url": "https://tools.idigitrust.com/api/v1/mcp"
+    }
+  }
+}
