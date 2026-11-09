@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "ssl-toolkit": {
+      "type": "http",
+      "url": "https://tools.idigitrust.com/api/v1/mcp"
+    }
+  }
+}

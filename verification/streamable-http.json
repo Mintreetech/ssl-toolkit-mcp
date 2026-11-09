@@ -1,0 +1,65 @@
+{
+  "checkedAt": "2026-11-09T07:49:00.594Z",
+  "endpoint": "https://tools.idigitrust.com/api/v1/mcp",
+  "sdkVersion": "1.32.2",
+  "server": {
+    "name": "ssl-toolkit",
+    "version": "v1.6.2"
+  },
+  "tools": [
+    "cert.decode",
+    "cert.match",
+    "convert.run",
+    "csr.decode",
+    "csr.generate",
+    "dcv.check",
+    "dcv.list_cas",
+    "inspect.run"
+  ],
+  "observations": [
+    {
+      "method": "POST",
+      "rpc": "initialize",
+      "status": 200,
+      "contentType": "application/json",
+      "protocolHeader": null
+    },
+    {
+      "method": "POST",
+      "rpc": "notifications/initialized",
+      "status": 202,
+      "contentType": null,
+      "protocolHeader": "2025-11-25"
+    },
+    {
+      "method": "GET",
+      "status": 405,
+      "contentType": "text/plain; charset=utf-8",
+      "protocolHeader": "2025-11-25"
+    },
+    {
+      "method": "POST",
+      "rpc": "tools/list",
+      "status": 200,
+      "contentType": "application/json",
+      "protocolHeader": "2025-11-25"
+    },
+    {
+      "method": "POST",
+      "rpc": "tools/call",
+      "status": 200,
+      "contentType": "application/json",
+      "protocolHeader": "2025-11-25"
+    },
+    {
+      "method": "POST",
+      "rpc": "ping",
+      "status": 200,
+      "contentType": "application/json",
+      "protocolHeader": "2025-11-25"
+    }
+  ],
+  "originDenied": 403,
+  "standaloneSSE": 405,
+  "passed": true
+}

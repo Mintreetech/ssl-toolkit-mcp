@@ -1,0 +1,22 @@
+DRAFT — submit after these repository changes have been pushed. Confirm the v1.6.2 deployment evidence before submitting.
+
+Thank you for the review. We have addressed the three points:
+
+1. Transport consistency
+The hosted endpoint supports standard Streamable HTTP in stateless JSON-response mode. The old README and English AI-index text described an earlier implementation and were outdated. We have corrected both, retained the streamable-http remote, and updated the registry version to match the verified v1.6.2 service. No custom protocol adapter is required for clients supporting Streamable HTTP.
+
+We verified the public endpoint with the official @modelcontextprotocol/sdk 1.32.2 and its StreamableHTTPClientTransport on November 9, 2026. Initialization, the initialized notification, tools/list, tools/call (dcv.list_cas), and ping passed. The reproducible check and timestamped result are included in scripts/check-streamable.mjs and verification/streamable-http.json. JSON responses, stateless operation, and GET 405 follow the standard transport's permitted behavior.
+
+2. English setup documentation
+README.md now provides English setup instructions and configuration examples for VS Code/GitHub Copilot, Cursor, and Claude Code, plus a complete curl lifecycle example and troubleshooting guidance. The Chinese guide is retained as README.zh-CN.md. The verification notes distinguish the SDK test from client UI testing.
+
+3. Production-key warning
+A prominent warning appears before setup instructions in both README versions and in the English AI index. It explicitly tells users not to submit production private keys, PFX/P12/JKS keystores, or their passwords to the hosted tools, including through MCP clients. It also explains that hosted key generation is for testing and that clients/AI providers may retain tool inputs and outputs. The v1.6.2 application also adds warnings to the CSR, matching and conversion pages, sensitive MCP tool descriptions, and runtime MCP documentation.
+
+Relevant files:
+https://github.com/Mintreetech/ssl-toolkit-mcp/blob/main/README.md
+https://github.com/Mintreetech/ssl-toolkit-mcp/blob/main/README.zh-CN.md
+https://github.com/Mintreetech/ssl-toolkit-mcp/blob/main/server.json
+https://github.com/Mintreetech/ssl-toolkit-mcp/blob/main/deploy/llms-en.txt
+https://github.com/Mintreetech/ssl-toolkit-mcp/blob/main/verification/streamable-http.json
+https://github.com/Mintreetech/ssl-toolkit-mcp/blob/main/scripts/check-streamable.mjs
