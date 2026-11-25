@@ -1,5 +1,7 @@
 # IDigiTrust SSL 工具站 MCP
 
+[![IDigiTrust SSL Toolkit MCP connector](https://glama.ai/mcp/connectors/io.github.Mintreetech/ssl-toolkit-mcp/badges/score.svg)](https://glama.ai/mcp/connectors/io.github.Mintreetech/ssl-toolkit-mcp)
+
 [English](README.md) | 简体中文
 
 > [!WARNING]
